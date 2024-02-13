@@ -3,7 +3,7 @@ from interview.models import Interview
 from django.db.models import Prefetch
 
 # Create your views here.
-def index(request):
+def interview(request):
     interviews = Interview.objects.all()
     print("interviews", interviews)
     return render(request, 'interview/interview.html', {
