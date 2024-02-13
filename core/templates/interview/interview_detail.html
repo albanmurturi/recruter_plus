@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mx-auto p-8">
+    <div class="w-full p-6 bg-white rounded-lg shadow-md">
+        <h1 class="text-3xl font-bold mb-2">Interview: {{ interview.name }}</h1> 
+        <p>{{ interview.job_description }}</p>
+
+    {% for subject in subjects %}
+        <div class="mt-4 p-4 bg-gray-50 rounded">
+            <h2 class="text-xl font-semibold mb-2">{{ forloop.counter }}. {{ subject.name }}</h2> 
+            <p>{{ subject.description }}</p>
+            <ul class="pl-5">
+                {% for question in subject.questions.all %}
+                    <li class="mt-1">{{ forloop.counter }}. {{ question.text }}</li> 
+                {% endfor %}
+            </ul>
+        </div>
+
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}

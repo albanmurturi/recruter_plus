@@ -8,11 +8,11 @@
         <h2 class="text-xl font-semibold mb-2">Questions</h2>
         {% for question in subject_detail.questions.all %}
             <div class="mb-4">
-                <h3 class="font-semibold text-lg">{{ question.question }}</h3>
-                <ul class="list-disc pl-5">
+                <h3 class="font-semibold text-lg">{{ forloop.counter }}. {{ question.text }}</h3>
+                
                    
-                        <li>{{ question.answer }}</li>
-                </ul>
+                <p>{{ question.answer |safe}}</p>
+                
             </div>
         {% empty %}
             <p>No questions found for this subject.</p>

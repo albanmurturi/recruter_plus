@@ -9,11 +9,11 @@ def index(request):
     ).values(
         'id', 'name', 'description', 'question_num'
     )
-    return render(request, 'index.html', {
+    return render(request, 'core/index.html', {
         'subjects': subjects_with_question_count
     })
 
 def subject_detail(request, id):
     # Fetch the subject by id and render a detail template
     subject_detail = get_object_or_404(Subject.objects.prefetch_related('questions'), id=id)
-    return render(request, 'subject_detail.html', {'subject_detail': subject_detail})
+    return render(request, 'core/subject_detail.html', {'subject_detail': subject_detail})
