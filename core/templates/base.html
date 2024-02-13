@@ -44,7 +44,7 @@
                     <div id="user-menu-dropdown" class="hidden absolute right-0 mt-2 w-48 bg-white border rounded-md shadow-lg">
                         <a href="#" class="cursor-not-allowed opacity-50 block px-4 py-2 text-gray-800 hover:bg-gray-200">Profile</a>
                         <a href="#" class="cursor-not-allowed opacity-50 block px-4 py-2 text-gray-800 hover:bg-gray-200">Settings</a>
-                        <a href="" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Logout</a>
+                        <a href="{% url 'core:logout' %}" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Logout</a>
                     </div>
                 </div>
             {% else %}

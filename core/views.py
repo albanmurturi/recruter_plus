@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from subject.models import Subject
 from django.db.models import Count
 from .forms import SignupForm
+from django.contrib.auth import logout
 
 # Create your views here.
 def index(request):
@@ -33,3 +34,7 @@ def signup(request):
     return render(request, 'core/signup.html', {
         'form': form
     })
+
+def logout_view(request):
+    logout(request)
+    return redirect('core:index')
