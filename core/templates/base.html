@@ -10,9 +10,12 @@
 <body class="bg-gray-50">
     <header class="text-gray-600 body-font shadow w-full">
         <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
-            <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
-                <span class="ml-3 text-xl">My Django App</span>
+            <a href="{% url 'index' %}" class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+                <span class="ml-3 text-xl">Recruter Plus</span>
             </a>
+
+            <div class="flex-1"></div>
+            <a href="{% url 'interview' %}" class="text-gray-900 text-xl">My Interviews</a>
         </div>
     </header>
 

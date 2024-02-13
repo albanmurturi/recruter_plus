@@ -13,9 +13,10 @@ class Subject(models.Model):
 
 class Question(models.Model):
     subject = models.ForeignKey(Subject, related_name="questions", on_delete=models.CASCADE)
-    question = models.TextField()
+    text = models.TextField()
     answer = models.TextField()
-
+    class Meta:
+        ordering = ('id',)
 
     def __str__(self):
-        return self.question
+        return self.text
