@@ -1,3 +1,5 @@
+
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,23 +8,7 @@
     <title>My Django App</title>
     <!-- Import Tailwind CSS from CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-<script>
-    function toggleDropdown() {
-        var dropdown = document.getElementById('user-menu-dropdown');
-        dropdown.classList.toggle('hidden');
-    }
-
-    // Close dropdown when clicking outside of it
-    document.addEventListener('click', function (event) {
-        var isClickInside = document.getElementById('user-menu').contains(event.target) ||
-            document.getElementById('user-menu-dropdown').contains(event.target);
-
-        if (!isClickInside) {
-            document.getElementById('user-menu-dropdown').classList.add('hidden');
-        }
-    });
-</script>
+    <script src="{% static 'js/my_script.js' %}"></script>
 </head>
 <body class="bg-gray-50">
     <header class="text-gray-600 body-font shadow w-full">
@@ -34,7 +20,7 @@
             <div class="flex-1"></div>
             {% if request.user.is_authenticated %}
                 <a href="{% url 'interview' %}" class="px-4 text-gray-900 text-xl">My Interviews</a>
-                <div class="relative" onclick="toggleDropdown()">
+                <div class="relative" onclick="toggleUserMenuDropdown()">
                     <a id="user-menu" class="flex items-center px-4 text-gray-900 text-xl cursor-pointer">
                         {{ request.user.username }}
                         {% with email_hash=request.user.email|lower|add:'gravatar' %}
