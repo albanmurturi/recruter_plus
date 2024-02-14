@@ -5,8 +5,8 @@
     <div class="flex flex-wrap -m-4">
         {% for interview in interviews %}
         <div class="p-4 lg:w-1/3">
-            <a href="{{ interview.id }}" class="h-full bg-white p-8 rounded hover:bg-gray-100">
-                <div class="h-full bg-white p-8 rounded">
+            <a href="{{ interview.id }}" class="block h-full bg-white p-8 rounded hover:bg-gray-100">
+                <div class="h-full">
                     <h1 class="title-font text-lg font-medium text-gray-900 mb-3">{{ interview.name }}</h1>
                     <p class="leading-relaxed mb-3">{{ interview.job_description }}</p>
                 </div>
