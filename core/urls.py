@@ -1,16 +1,13 @@
 from django.urls import path
-from . import views
-from django.contrib.auth import views as auth_views
-from .forms import LoginForm
-from .views import logout_view
+from .views import *
 
 app_name = 'core'
 
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('subject/<int:id>/', views.subject_detail, name='subject_detail'),
-    path('signup/', views.signup, name='signup'),
-    path('login/', auth_views.LoginView.as_view(template_name='core/login.html', authentication_form=LoginForm), name='login'),
+    path('', index, name='index'),
+    path('subject/<int:id>/', subject_detail, name='subject_detail'),
+    path('signup/', signup, name='signup'),
+    path('login/', CustomLoginView.as_view(), name='login'),
     path('logout/', logout_view, name='logout'),
 ]
     
