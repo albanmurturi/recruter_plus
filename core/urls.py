@@ -1,7 +1,13 @@
 from django.urls import path
-from . import views
+from .views import *
+
+app_name = 'core'
 
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('subject/<int:id>/', views.subject_detail, name='subject_detail'),
+    path('', index, name='index'),
+    path('subject/<int:id>/', subject_detail, name='subject_detail'),
+    path('signup/', signup, name='signup'),
+    path('login/', CustomLoginView.as_view(), name='login'),
+    path('logout/', logout_view, name='logout'),
 ]
+    
