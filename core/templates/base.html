@@ -12,14 +12,15 @@
 </head>
 <body class="bg-gray-50">
     <header class="text-gray-600 body-font shadow w-full">
-        <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+        <div class="container mx-auto flex flex-wrap p-2 flex-col md:flex-row items-center">
             <a href="{% url 'core:index' %}" class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
                 <span class="ml-3 text-xl">Recruter Plus</span>
             </a>
 
             <div class="flex-1"></div>
             {% if request.user.is_authenticated %}
-                <a href="{% url 'interview' %}" class="px-4 text-gray-900 text-xl">My Interviews</a>
+                <a href="{% url 'core:index' %}" class="p-2 text-gray-900 text-xl rounded {% if request.path == '/' %}bg-[#9ca3af] text-white{% endif %}">Home</a>
+                <a href="{% url 'interview' %}" class="p-2 text-gray-900 text-xl rounded {% if '/interview/' in request.path %}bg-[#9ca3af] text-white{% endif %}">My Interviews</a>
                 <div class="relative" onclick="toggleUserMenuDropdown()">
                     <a id="user-menu" class="flex items-center px-4 text-gray-900 text-xl cursor-pointer">
                         {{ request.user.username }}
