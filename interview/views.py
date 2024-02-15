@@ -1,13 +1,11 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
-from django.db.models import Prefetch
 from django.db.models import F
 
-from subject.models import Subject
+from subject.models import Question
 
 from .models import Interview
 from .forms import InterviewForm
-from subject.models import Question
 
 
 # Create your views here.
