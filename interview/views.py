@@ -1,8 +1,10 @@
-from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, get_object_or_404
+from django.db.models import Prefetch
+
+from subject.models import Subject
 
 from interview.models import Interview
-from django.db.models import Prefetch
 
 # Create your views here.
 @login_required
@@ -29,3 +31,7 @@ def interview_detail(request, id):
         'subjects': subjects_with_questions,
     }
     return render(request, 'interview/interview_detail.html', context)
+
+def new_interview(request):
+    subjects = Subject.objects.all()
+    return render(request, 'interview/new_interview.html', {'subjects': subjects } )
