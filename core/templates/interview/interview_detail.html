@@ -6,14 +6,37 @@
         <h1 class="text-3xl font-bold mb-2">Interview: {{ interview.name }}</h1> 
         <p>{{ interview.job_description }}</p>
         <div class="mt-4 p-4 bg-gray-50 rounded">
-            <h2 class="text-xl font-semibold mb-2">{{ subject_with_random_question.subject_name }}</h2> 
-            <strong><p class="mt-1">{{ subject_with_random_question.question_text }}</p> </strong>
-            <div class="mt-2 flex flex-col">
-                <div class="h-48 overflow-y-auto">
-                    <p class="text-gray-700">{{ subject_with_random_question.question_answer }}</p> 
+            {% if subject_with_random_question %}
+                <h2 class="text-xl font-semibold mb-2">{{ subject_with_random_question.subject_name }}</h2> 
+                <strong><p class="mt-1">{{ subject_with_random_question.question_text }}</p> </strong>
+                <div class="mt-2 flex flex-col">
+                    <div class="h-48 overflow-y-auto">
+                        <p class="text-gray-700">{{ subject_with_random_question.question_answer }}</p>
+                    </div>
+                    <form method="post" action=".">
+                        {% csrf_token %}
+                        <input type="hidden" name="question_id" value="{{ subject_with_random_question.question_id }}">
+                        <div class="flex justify-end space-x-2"> 
+                            <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-2 self-end">Mark as learned</button>
+                            <button type="button" onclick="window.location.reload();" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2 self-end">Next</button>
+                        </div>
+                    </form>
                 </div>
-                <button onclick="window.location.reload();" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2 self-end">Next</button>
-            </div>
+            {% else %}
+                
+                <div class="mt-2 flex flex-col">
+                    <div class="h-48 overflow-y-auto flex justify-center items-center"> <!-- Updated classes here -->
+                        <h2 class="text-xl font-semibold mb-2 text-center">You already learned all questions</h2>
+                    </div>
+                    <form method="post" action=".">
+                        {% csrf_token %}
+                        <input type="hidden" name="reset" value="1">
+                        <div class="flex justify-end space-x-2">
+                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2 self-end">Reset all questions</button>
+                        </div>
+                    </form>
+                </div>
+            {% endif%}
         </div>
     </div>
 </div>

@@ -27,6 +27,14 @@ def interview_detail(request, id):
     # Fetch the interview by id and render a detail template
     interview = get_object_or_404(interviews, id=id)
 
+    if request.method == 'POST':
+        if request.POST.getlist('question_id'):
+            interview.learend_quesitons.add(int(request.POST.getlist('question_id')[0]))
+            interview.save()
+        if request.POST.getlist('reset'):
+            interview.learend_quesitons.set([])
+            interview.save()
+
     # Annotate a random question with its subject
     random_question = Question.objects.filter(subject__in=interview.subjects.all()).annotate(
         subject__id=F('subject_id'),
@@ -35,8 +43,7 @@ def interview_detail(request, id):
         question_id=F('id'),
         question_text=F('text'),
         question_answer=F('answer'),
-    ).order_by('?').first()
-
+    ).exclude(id__in=interview.learend_quesitons.values_list('id', flat=True)).order_by('?').first()
 
     # Prepare the context for rendering
     context = {
