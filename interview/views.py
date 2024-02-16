@@ -1,11 +1,11 @@
-
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, get_object_or_404
-from django.db.models import Prefetch
+from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import F
 
-from interview.models import Interview
 from subject.models import Question
+
+from .models import Interview
+from .forms import InterviewForm
 
 
 # Create your views here.
@@ -44,3 +44,27 @@ def interview_detail(request, id):
         'subject_with_random_question': random_question,
     }
     return render(request, 'interview/interview_detail.html', context)
+
+def new_interview(request):
+    if request.method == 'POST':
+        form = InterviewForm(request.POST)
+        # Extract data from the form
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            job_description = form.cleaned_data['job_description']
+            subjects = form.cleaned_data['subjects']
+
+            # Create a new object with the extracted data
+            new_object = Interview.objects.create(
+                name=name,
+                job_description=job_description,
+                user=request.user
+            )
+            new_object.subjects.set(subjects)
+
+            new_object.save()
+            return redirect('/interview')
+    else:
+         form = InterviewForm()
+
+    return render(request, 'interview/new_interview.html', {'form':  form} )

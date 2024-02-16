@@ -12,8 +12,14 @@
                 </div>
             </a>
         </div>
-
+        {% empty %}
+            <div class="p-4 lg:w-1/3">
+                <h1> You do not have any interview yet!</h1>
+            </div>
         {% endfor %}
+    </div>
+     <div class="absolute top-12 right-1 p-4">
+        <a href="{% url 'new_interview' %}" class="px-4 text-gray-900 text-xl bg-blue-500 py-2 rounded-md inline-block hover:bg-blue-700">New Interview</a>
     </div>
 </div>
 {% endblock %}
