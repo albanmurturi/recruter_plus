@@ -40,4 +40,51 @@
         </div>
     </div>
 </div>
+
+<!-- Popup form for new users -->
+<div id="popupForm" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center hidden">
+    <div class="bg-white w-80 p-8 rounded-lg shadow-lg">
+        <h2 class="text-xl font-semibold mb-4">Welcome to Interviews!</h2>
+        <p class="text-gray-700">Here you can learn interview questions. Just click "Next" to move to the next question. If you've learned all questions, you can reset them to learn again.</p>
+        <button onclick="closePopup()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-6">Got it!</button>
+    </div>
+</div>
+
+<!-- Question mark icon to reopen the popup -->
+<div id="questionMark" onclick="showPopup()" class="fixed bottom-8 right-8 z-10">
+    <div class="w-10 h-10 flex items-center justify-center bg-gray-300 text-gray-900 rounded-full cursor-pointer shadow-md">
+        <span class="text-xl font-semibold">?</span>
+    </div>
+</div>
+
+<script>
+    // Function to show the popup for new users
+    function showPopup() {
+        var popup = document.getElementById("popupForm");
+        popup.classList.remove("hidden");
+        // Set a flag in localStorage indicating that the user has seen the popup
+        localStorage.setItem("popupShown", "true");
+    }
+
+    // Function to close the popup
+    function closePopup() {
+        var popup = document.getElementById("popupForm");
+        popup.classList.add("hidden");
+    }
+
+    // Check if the user has already seen the popup
+    var popupShown = localStorage.getItem("popupShown");
+
+    // Show the popup only if the user is new
+    if (!popupShown) {
+        showPopup();
+    }
+
+    // Function to handle clicks on the question mark icon
+    document.getElementById("questionMark").addEventListener("click", function() {
+        // Show the popup when the question mark icon is clicked
+        showPopup();
+    });
+</script>
+
 {% endblock %}
